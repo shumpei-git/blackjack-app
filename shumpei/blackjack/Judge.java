@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Judge {
     /**
-     *
-     * @param playerHand
-     * @param dealerHand
+     * 手札に基づく勝敗判定メソッド
+     * @param playerHand プレイヤーのHandオブジェクト
+     * @param dealerHand ディーラーのHandオブジェクト
      * @return 0（ディーラーの勝利）/1（引き分け）/2（プレーヤーの勝利）
      */
     public int handJudge(Hand playerHand, Hand dealerHand) {
@@ -46,6 +46,11 @@ public class Judge {
         return tie;
     }
 
+    /**
+     * プレイヤーのポイントに基づく勝敗判定メソッド
+     * @param playerPoint
+     * @return
+     */
     public int finalJudge(double playerPoint) {
         final int loose = 0;
         final int next = 1;

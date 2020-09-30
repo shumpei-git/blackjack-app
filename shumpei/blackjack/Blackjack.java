@@ -1,16 +1,22 @@
 package shumpei.blackjack;
 
-import java.util.List;
-import java.util.Scanner;
-
-public class Game {
+public class Blackjack {
     private Player player;
     private Player dealer;
     private GameMsg gameMsg;
     private CardStuck cardStuck;
     private Judge judge;
 
-    public Game(Player player, Player dealer, GameMsg gameMsg, CardStuck cardStuck, Judge judge) {
+    public static Blackjack createBlackjack() {
+        Player player = new Player("プレイヤー", 1000);
+        Player dealer = new Player("ディーラー", 0);
+        GameMsg gameMsg = new GameMsg();
+        CardStuck cardStuck = new CardStuck();
+        Judge judge = new Judge();
+        return new Blackjack(player, dealer, gameMsg, cardStuck, judge);
+    }
+
+    private Blackjack(Player player, Player dealer, GameMsg gameMsg, CardStuck cardStuck, Judge judge) {
         this.player = player;
         this.dealer = dealer;
         this.gameMsg = gameMsg;
