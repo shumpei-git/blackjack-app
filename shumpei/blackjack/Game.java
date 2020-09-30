@@ -30,7 +30,8 @@ public class Game {
             //掛けポイントを入力
             gameMsg.urgePlayerToBet(player.getPoint());
             gameMsg.displayPoint(player.getPoint());
-            double betPoint = new Scanner(System.in).nextDouble();// TODO: 入力値チェック
+            // double betPoint = new Scanner(System.in).nextDouble();// TODO: 入力値チェック
+            int betPoint = Input.inputBetPoint();
             gameMsg.lineFeed();
 
             //プレイヤーに手札を２枚配る
@@ -48,7 +49,8 @@ public class Game {
             //プレイヤーがカードを引くか選択（ストップするかバーストするかまで繰り返し）
             while(true) {
                 gameMsg.hitOrStand();
-                int hitOrStand = new Scanner(System.in).nextInt();// TODO: 入力値チェック
+                // int hitOrStand = new Scanner(System.in).nextInt();// TODO: 入力値チェック
+                int hitOrStand = Input.selectHitOrStand();
                 if (hitOrStand == 0) {
                     gameMsg.stand();
                     break;
