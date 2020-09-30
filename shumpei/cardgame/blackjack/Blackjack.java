@@ -50,7 +50,7 @@ public class Blackjack {
 
         gameMsg.end();
     }
-    
+
     private int ready() {
         //掛けポイントを入力
         gameMsg.urgePlayerToBet(player.getPoint());
