@@ -100,13 +100,13 @@ public class Hand {
             return;
         }
 
-        if (this.cardList.size() >= 7) {
+        if (this.score <= 21 && this.cardList.size() >= 7) {
             this.rank = "セブンカード";
             this.rate = 10;
             return;
         }
 
-        if (this.cardList.size() >= 6) {
+        if (this.score <= 21 && this.cardList.size() >= 6) {
             this.rank = "シックスカード";
             this.rate = 5;
             return;

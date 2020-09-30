@@ -47,7 +47,7 @@ public class Judge {
     /**
      * プレイヤーのポイントに基づく勝敗判定メソッド
      * @param playerPoint
-     * @return
+     * @return 0（プレーヤーの負け）/1（ゲーム継続）/2（プレーヤーの勝利）
      */
     public int finalJudge(double playerPoint) {
         final int loose = 0;
