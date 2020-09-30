@@ -1,4 +1,6 @@
-package shumpei.blackjack;
+package shumpei.cardgame;
+
+import shumpei.cardgame.blackjack.Blackjack;
 
 public class Main {
 

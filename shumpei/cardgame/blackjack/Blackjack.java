@@ -1,4 +1,4 @@
-package shumpei.blackjack;
+package shumpei.cardgame.blackjack;
 
 public class Blackjack {
     private Player player;

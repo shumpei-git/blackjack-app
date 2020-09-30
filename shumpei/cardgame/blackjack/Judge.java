@@ -1,6 +1,4 @@
-package shumpei.blackjack;
-
-import java.util.List;
+package shumpei.cardgame.blackjack;
 
 public class Judge {
     /**
