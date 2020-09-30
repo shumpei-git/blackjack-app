@@ -121,14 +121,6 @@ public class GameMsg {
         System.out.println("【結果発表】");
     }
 
-    public void showScore(Player player) {
-        if (player.getHand().getScore() > 21) {
-            System.out.println(player.getName() + "のスコア：バースト");
-            return;
-        }
-        System.out.println(player.getName() + "のスコア：" + player.getHand().getScore());
-    }
-
     public void finalResult() {
         System.out.println("【最終結果】");
     }
