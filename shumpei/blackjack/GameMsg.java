@@ -11,8 +11,8 @@ public class GameMsg {
     }
 
     public void urgePlayerToBet(double point) {
-        double max = point < 100 ? point : 100;
-        System.out.println("1から" + max + "の間で、賭けポイントを決めてください。");
+        int max = point < 100 ? (int) point : 100;
+        System.out.println("1から" + max + "の間の整数値で、賭けポイントを決めてください。");
     }
 
     public void displayPoint(double point) {
@@ -98,7 +98,7 @@ public class GameMsg {
         System.out.println("スコアが17以上になるまで、ディーラーがヒットしました。");
     }
 
-    public void looseHand(double betPoint) {
+    public void looseHand(int betPoint) {
         System.out.println("プレイヤーの負けです。");
         System.out.println("賭けた" + betPoint + "ポイントが没収されました。");
     }
