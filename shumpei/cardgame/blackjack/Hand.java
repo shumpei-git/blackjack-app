@@ -30,6 +30,14 @@ public class Hand {
         return this.rate;
     }
 
+    void addOneCardFrom(List<Card> cardStuck) {
+        Card newCard = cardStuck.get(0);
+        cardList.add(newCard);
+        updateScore();
+        updateRankAndRate();
+        cardStuck.remove(0);
+    }
+
     public void updateScore() {
         List<Integer> cardNumbers = new ArrayList<Integer>();
         for (Card card: this.cardList) {
