@@ -5,14 +5,16 @@ import java.util.Scanner;
 public class Input {
     /**
      * 賭けポイント入力メソッド
-     * @return 賭けポイント（1<=賭けポイント<=100の整数）
+     * @param min
+     * @param max
+     * @return 賭けポイント（1<=賭けポイント<=maxの整数）
      */
-    public static int inputBetPoint() {
+    public static int inputBetPoint(int min, int max) {
         while (true) {
             Scanner in = new Scanner(System.in);
             if (in.hasNextInt()) {
                 int betPoint = in.nextInt();
-                if (1 <= betPoint && betPoint <= 100) {
+                if (1 <= betPoint && betPoint <= max) {
                     return betPoint;
                 } else {
                     System.out.println("入力値が不正です。再入力してください。");

@@ -1,11 +1,23 @@
 package shumpei.cardgame.blackjack;
 
 class Result {
-    public int gameResult;
-    public String rank;// 手札の役
+    private int gameResult;
+    private double rate;
+//    public String playerHandRank;// プレイヤーの手札の役
+//    public String dealerHandRank;// ディーラーの手札の役
 
-    Result(int gameResult, String rank) {
+    Result(int gameResult, double rate) {
         this.gameResult = gameResult;
-        this.rank = rank;
+        this.rate = rate;
+//        this.playerHandRank = playerHandRank;
+//        this.dealerHandRank = dealerHandRank;
+    }
+
+    int getGameResult() {
+        return gameResult;
+    }
+
+    double getRate() {
+        return rate;
     }
 }
