@@ -1,6 +1,7 @@
 package shumpei.cardgame;
 
 import shumpei.cardgame.blackjack.Blackjack;
+import shumpei.cardgame.lot.Lot;
 
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ public class Menu {
             new Blackjack().start();
         }
         if (gameId == 1) {
-            System.out.println("おみくじは作成中です。");
+            new Lot().start();
         }
         System.out.println("また遊んでくださいね。");
     }
