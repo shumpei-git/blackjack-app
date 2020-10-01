@@ -6,19 +6,11 @@ public class Blackjack {
     private GameMsg gameMsg = new GameMsg();
     private double point;
 
-    public static Blackjack createNormalModeBlackjack() {
-        return new Blackjack(1000);
-    }
-
-    public static Blackjack createHardModeBlackjack() {
-        return new Blackjack(500);
-    }
-
-    private Blackjack(int point) {
-        this.point = point;
-    }
+    public Blackjack() {}
 
     public void start(){
+        selectMode();
+
         int numOfGames = 0;
 
         gameMsg.start();
@@ -39,6 +31,34 @@ public class Blackjack {
         }
 
         gameMsg.end();
+    }
+
+    private void selectMode() {
+        System.out.println("難易度を選択します。");
+        System.out.println("ノーマル（持ちポイント1000）:0、ハード（持ちポイント500）:1");
+        int modeId = selectZeroOrOne();
+        if (modeId == 0) {
+            point = 1000;
+        }
+        if (modeId == 1) {
+            point = 500;
+        }
+    }
+
+    private int selectZeroOrOne() {
+        while (true) {
+            Scanner in = new Scanner(System.in);
+            if (in.hasNextInt()) {
+                int num = in.nextInt();
+                if (num == 0 || num == 1) {
+                    return num;
+                } else {
+                    System.out.println("入力値が不正です。再入力してください。");
+                }
+            } else {
+                System.out.println("入力値が不正です。再入力してください。");
+            }
+        }
     }
 
     private int bet() {

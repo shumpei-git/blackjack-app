@@ -8,12 +8,11 @@ public class Menu {
     public void start(){
         System.out.println("トランプで遊びましょう。");
         System.out.println("ブラックジャックで遊ぶなら0、おみくじをするなら1を入力してください。");
-        if (selectZeroOrOne() == 0) {
-            Blackjack blackJack = Blackjack.createNormalModeBlackjack();
-//        Blackjack blackJack = Blackjack.createNormalModeBlackjack();
-            blackJack.start();
+        int gameId = selectZeroOrOne();
+        if (gameId == 0) {
+            new Blackjack().start();
         }
-        if (selectZeroOrOne() == 1) {
+        if (gameId == 1) {
             System.out.println("おみくじは作成中です。");
         }
         System.out.println("また遊んでくださいね。");
