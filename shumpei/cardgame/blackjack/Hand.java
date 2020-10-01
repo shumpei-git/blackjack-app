@@ -61,16 +61,6 @@ public class Hand {
         }
     }
 
-    public boolean checkBust() {
-        return this.score > 21;
-    }
-
-    public void discardAllCards() {
-        for (int i = this.cardList.size(); i > 0; i--) {
-            this.cardList.remove(0);
-        }
-    }
-
     public void updateRankAndRate() {
 
         if (this.score == 21 && this.cardList.size() == 2 ) {
@@ -138,5 +128,9 @@ public class Hand {
         this.rank = "なし";
         this.rate = 1;
         return;
+    }
+
+    public boolean checkBust() {
+        return this.score > 21;
     }
 }

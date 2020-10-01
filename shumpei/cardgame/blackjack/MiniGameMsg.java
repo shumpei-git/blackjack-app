@@ -1,27 +1,27 @@
 package shumpei.cardgame.blackjack;
 
 class MiniGameMsg {
-    public void dealOutCards() {
+    void dealOutCards() {
         System.out.println("手札を2枚ずつ配ります。");
     }
 
-    public void hitOrStand() {
+    void hitOrStand() {
         System.out.println("ヒットするなら1、スタンドするなら0を入力してください。");
     }
 
-    public void stand() {
+    void stand() {
         System.out.println("スタンドしました。");
     }
 
-    public void hit() {
+    void hit() {
         System.out.println("ヒットしました。");
     }
 
-    public void bust() {
+    void bust() {
         System.out.println("プレイヤーがバーストしました。");
     }
 
-    public void showHand(Hand playerHand) {
+    void showHand(Hand playerHand) {
         System.out.println("プレイヤーの手札：");
         for(Card card: playerHand.getCardList()) {
             // 絵札の場合に数値ではなく名称を表示するための処理
@@ -54,7 +54,7 @@ class MiniGameMsg {
         System.out.println(" 倍率：" + playerHand.getRate() + "倍");
     }
 
-    public void showFirstCard(Hand dealerHand) {
+    void showFirstCard(Hand dealerHand) {
         System.out.println("ディーラーの手札：");
 
         Card firstCard = dealerHand.getCardList().get(0);
@@ -80,25 +80,25 @@ class MiniGameMsg {
         System.out.println("*");
     }
 
-    public void dealerAction() {
+    void dealerAction() {
         System.out.println("スコアが17以上になるまで、ディーラーがヒットしました。");
     }
 
-    public void result() {
+    void result() {
         System.out.println("【結果発表】");
     }
 
-    public void loose() {
+    void loose() {
         System.out.println("プレイヤーの負けです。");
     }
 
-    public void tie() {
+    void tie() {
         System.out.println("引き分けです。");
     }
 
-    public void win() {
+    void win() {
         System.out.println("プレイヤーの勝ちです。");
     }
 
-    public void lineFeed() { System.out.println();}
+    void lineFeed() { System.out.println();}
 }

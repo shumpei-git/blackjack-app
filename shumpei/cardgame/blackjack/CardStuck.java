@@ -31,10 +31,4 @@ public class CardStuck {
         Collections.shuffle(this.cardList);
     }
 
-    public void reset() {
-        this.cardList = null;
-        this.cardList = new ArrayList<Card>();
-        createCardStuck();
-        shuffle();
-    }
 }

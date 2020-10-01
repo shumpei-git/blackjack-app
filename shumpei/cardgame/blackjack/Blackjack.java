@@ -2,19 +2,15 @@ package shumpei.cardgame.blackjack;
 
 public class Blackjack {
     private GameMsg gameMsg;
-    private Judge judge;
-
     private double point = 1000;
 
     public static Blackjack createBlackjack() {
         GameMsg gameMsg = new GameMsg();
-        Judge judge = new Judge();
-        return new Blackjack(gameMsg, judge);
+        return new Blackjack(gameMsg);
     }
 
-    private Blackjack(GameMsg gameMsg, Judge judge) {
+    private Blackjack(GameMsg gameMsg) {
         this.gameMsg = gameMsg;
-        this.judge = judge;
     }
 
     public void start(){
@@ -62,25 +58,19 @@ public class Blackjack {
     }
 
     private boolean checkWhetherFinished() {
-        // 最終結果
-
-        // finalJudgeResultの値は、次のように定まる
-        // プレイヤーの負け：0
-        // ゲームが続く（勝敗未決）：1
-        // プレイヤーの勝ち：2
-        int finalJudgeResult = judge.finalJudge(point);
-
         // ゲームが終了する場合の処理
-        if(finalJudgeResult == 0) {
+        if(point < 1) {// 負け
             gameMsg.finalResult();
             gameMsg.loose(point);
             return true;
         }
-        if(finalJudgeResult == 2) {
+        if(point >= 2000) {// 勝ち
             gameMsg.finalResult();
             gameMsg.win(point);
             return true;
         }
+
+        //勝負継続
         return false;
     }
 
