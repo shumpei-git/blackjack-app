@@ -1,16 +1,21 @@
 package shumpei.cardgame.blackjack;
 
-public class Blackjack {
-    private GameMsg gameMsg;
-    private double point = 1000;
+import java.util.Scanner;
 
-    public static Blackjack createBlackjack() {
-        GameMsg gameMsg = new GameMsg();
-        return new Blackjack(gameMsg);
+public class Blackjack {
+    private GameMsg gameMsg = new GameMsg();
+    private double point;
+
+    public static Blackjack createNormalModeBlackjack() {
+        return new Blackjack(1000);
     }
 
-    private Blackjack(GameMsg gameMsg) {
-        this.gameMsg = gameMsg;
+    public static Blackjack createHardModeBlackjack() {
+        return new Blackjack(500);
+    }
+
+    private Blackjack(int point) {
+        this.point = point;
     }
 
     public void start(){
@@ -42,9 +47,25 @@ public class Blackjack {
         gameMsg.displayPoint(point);
         int min = 1;
         int max = (int) point < 100 ? (int) point : 100;
-        int betPoint = Input.inputBetPoint(min, max);
+        int betPoint = inputBetPoint(min, max);
         gameMsg.lineFeed();
         return betPoint;
+    }
+
+    private int inputBetPoint(int min, int max) {
+        while (true) {
+            Scanner in = new Scanner(System.in);
+            if (in.hasNextInt()) {
+                int betPoint = in.nextInt();
+                if (1 <= betPoint && betPoint <= max) {
+                    return betPoint;
+                } else {
+                    System.out.println("入力値が不正です。再入力してください。");
+                }
+            } else {
+                System.out.println("入力値が不正です。再入力してください。");
+            }
+        }
     }
 
     private void updatePoint(int betPoint, Result miniGameResult) {

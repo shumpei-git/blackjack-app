@@ -1,6 +1,10 @@
 package shumpei.cardgame.blackjack;
 
+import shumpei.cardgame.playingcard.Card;
+import shumpei.cardgame.playingcard.CardStuck;
+
 import java.util.List;
+import java.util.Scanner;
 
 class MiniGame {
     private List<Card> cardStuck;
@@ -51,7 +55,7 @@ class MiniGame {
         //プレイヤーがカードを引くか選択（ストップするかバーストするかまで繰り返し）
         while(true) {
             miniGameMsg.hitOrStand();
-            int hitOrStand = Input.selectHitOrStand();
+            int hitOrStand = selectHitOrStand();
             if (hitOrStand == 0) {
                 miniGameMsg.stand();
                 break;
@@ -67,6 +71,22 @@ class MiniGame {
             miniGameMsg.lineFeed();
         }
         miniGameMsg.lineFeed();
+    }
+
+    private int selectHitOrStand() {
+        while (true) {
+            Scanner in = new Scanner(System.in);
+            if (in.hasNextInt()) {
+                int num = in.nextInt();
+                if (num == 0 || num == 1) {
+                    return num;
+                } else {
+                    System.out.println("入力値が不正です。再入力してください。");
+                }
+            } else {
+                System.out.println("入力値が不正です。再入力してください。");
+            }
+        }
     }
 
     private void makeDealerAct() {

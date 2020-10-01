@@ -1,4 +1,4 @@
-package shumpei.cardgame.blackjack;
+package shumpei.cardgame.playingcard;
 
 import java.util.ArrayList;
 import java.util.List;

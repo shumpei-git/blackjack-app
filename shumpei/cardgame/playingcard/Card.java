@@ -1,4 +1,4 @@
-package shumpei.cardgame.blackjack;
+package shumpei.cardgame.playingcard;
 
 public class Card {
     private String suit;

@@ -1,48 +1,48 @@
 package shumpei.cardgame.blackjack;
 
-public class GameMsg {
+class GameMsg {
 
-    public void start() {
+    void start() {
         System.out.println("【ブラックジャックを開始します】");
     }
 
-    public void showNumOfGames(int numOfGames) {
+    void showNumOfGames(int numOfGames) {
         System.out.println("【第" + numOfGames + "回戦】");
     }
 
-    public void urgePlayerToBet(double point) {
+    void urgePlayerToBet(double point) {
         int max = point < 100 ? (int) point : 100;
         System.out.println("1から" + max + "の間の整数値で、賭けポイントを決めてください。");
     }
 
-    public void displayPoint(double point) {
+    void displayPoint(double point) {
         System.out.println("残りポイント：" + point);
     }
 
-    public void tieHand() {
+    void tieHand() {
         System.out.println("引き分けです。");
         System.out.println("ポイントに変動はありません。");
     }
 
-    public void finalResult() {
+    void finalResult() {
         System.out.println("【最終結果】");
     }
 
-    public void loose(double point) {
+    void loose(double point) {
         System.out.println("残りポイントが" + point + "です。");
         System.out.println("もう賭けるポイントがありません。");
         System.out.println("プレイヤーの負けです。");
     }
 
-    public void win(double point) {
+    void win(double point) {
         System.out.println("残りポイントは" + point + "です。");
         System.out.println("2000ポイントに達しました。");
         System.out.println("プレイヤーの勝ちです。");
     }
 
-    public void end() {
+    void end() {
         System.out.println("【ブラックジャックを終了します】");
     }
 
-    public void lineFeed() { System.out.println();}
+    void lineFeed() { System.out.println();}
 }

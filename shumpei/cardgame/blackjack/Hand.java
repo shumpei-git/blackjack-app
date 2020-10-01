@@ -1,32 +1,34 @@
 package shumpei.cardgame.blackjack;
 
+import shumpei.cardgame.playingcard.Card;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Hand {
+class Hand {
     private List<Card> cardList;
     private int score;
     private String rank = "なし";
     private double rate = 1;
 
-    public Hand() {
+    Hand() {
         this.cardList = new ArrayList<Card>();
     }
 
-    public List<Card> getCardList() {
+    List<Card> getCardList() {
         return cardList;
     }
 
-    public int getScore() {
+    int getScore() {
         return score;
     }
 
-    public String getRank() {
+    String getRank() {
         return this.rank;
     }
 
-    public double getRate() {
+    double getRate() {
         return this.rate;
     }
 
@@ -38,7 +40,7 @@ public class Hand {
         cardStuck.remove(0);
     }
 
-    public void updateScore() {
+    void updateScore() {
         List<Integer> cardNumbers = new ArrayList<Integer>();
         for (Card card: this.cardList) {
             cardNumbers.add(card.getNumber());
@@ -61,7 +63,7 @@ public class Hand {
         }
     }
 
-    public void updateRankAndRate() {
+    void updateRankAndRate() {
 
         if (this.score == 21 && this.cardList.size() == 2 ) {
             // ジャックが含まれるか調査
@@ -130,7 +132,7 @@ public class Hand {
         return;
     }
 
-    public boolean checkBust() {
+    boolean checkBust() {
         return this.score > 21;
     }
 }

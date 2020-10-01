@@ -1,5 +1,7 @@
 package shumpei.cardgame.blackjack;
 
+import shumpei.cardgame.playingcard.Card;
+
 class MiniGameMsg {
     void dealOutCards() {
         System.out.println("手札を2枚ずつ配ります。");
