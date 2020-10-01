@@ -1,30 +1,16 @@
 package shumpei.cardgame.blackjack;
 
+import java.util.Scanner;
+
 public class Blackjack {
-    private Player player;
-    private Player dealer;
-    private GameMsg gameMsg;
-    private CardStuck cardStuck;
-    private Judge judge;
+    private GameMsg gameMsg = new GameMsg();
+    private double point;
 
-    public static Blackjack createBlackjack() {
-        Player player = new Player("プレイヤー", 1000);
-        Player dealer = new Player("ディーラー", 0);
-        GameMsg gameMsg = new GameMsg();
-        CardStuck cardStuck = new CardStuck();
-        Judge judge = new Judge();
-        return new Blackjack(player, dealer, gameMsg, cardStuck, judge);
-    }
-
-    private Blackjack(Player player, Player dealer, GameMsg gameMsg, CardStuck cardStuck, Judge judge) {
-        this.player = player;
-        this.dealer = dealer;
-        this.gameMsg = gameMsg;
-        this.cardStuck = cardStuck;
-        this.judge = judge;
-    }
+    public Blackjack() {}
 
     public void start(){
+        selectMode();
+
         int numOfGames = 0;
 
         gameMsg.start();
@@ -34,13 +20,9 @@ public class Blackjack {
             ++numOfGames;
             gameMsg.showNumOfGames(numOfGames);
 
-            int betPoint = ready();
+            int betPoint = bet();
 
-            makePlayerAct();
-
-            makeDealerAct();
-
-            showResult(betPoint);
+            updatePoint(betPoint, new MiniGame().play());
 
             if (checkWhetherFinished()) {
                 break;
@@ -51,115 +33,85 @@ public class Blackjack {
         gameMsg.end();
     }
 
-    private int ready() {
-        //掛けポイントを入力
-        gameMsg.urgePlayerToBet(player.getPoint());
-        gameMsg.displayPoint(player.getPoint());
-        int betPoint = Input.inputBetPoint();
-        gameMsg.lineFeed();
-
-        //プレイヤーに手札を２枚配る
-        //ディーラーに手札を２枚配る
-        gameMsg.dealOutCards();
-        for (int i = 0; i < 2; i++) {
-            player.draw(cardStuck);
-            dealer.draw(cardStuck);
+    private void selectMode() {
+        System.out.println("難易度を選択します。");
+        System.out.println("ノーマル（持ちポイント1000）:0、ハード（持ちポイント500）:1");
+        int modeId = selectZeroOrOne();
+        if (modeId == 0) {
+            point = 1000;
         }
+        if (modeId == 1) {
+            point = 500;
+        }
+    }
 
-        //プレイヤーのカードを表示
-        gameMsg.showHand(player);
-        //ディーラーのカードを表示（２枚目は画面上 *として表示して下さい）
-        gameMsg.showFirstCard(dealer);
+    private int selectZeroOrOne() {
+        while (true) {
+            Scanner in = new Scanner(System.in);
+            if (in.hasNextInt()) {
+                int num = in.nextInt();
+                if (num == 0 || num == 1) {
+                    return num;
+                } else {
+                    System.out.println("入力値が不正です。再入力してください。");
+                }
+            } else {
+                System.out.println("入力値が不正です。再入力してください。");
+            }
+        }
+    }
 
+    private int bet() {
+        //掛けポイントを入力
+        gameMsg.urgePlayerToBet(point);
+        gameMsg.displayPoint(point);
+        int min = 1;
+        int max = (int) point < 100 ? (int) point : 100;
+        int betPoint = inputBetPoint(min, max);
         gameMsg.lineFeed();
         return betPoint;
     }
 
-    private void makePlayerAct() {
-        //プレイヤーがカードを引くか選択（ストップするかバーストするかまで繰り返し）
-        while(true) {
-            gameMsg.hitOrStand();
-            int hitOrStand = Input.selectHitOrStand();
-            if (hitOrStand == 0) {
-                gameMsg.stand();
-                break;
-            }
-            player.draw(cardStuck);
-            gameMsg.hit();
-            gameMsg.showHand(player);
-            // バースト判定
-            if (player.getHand().checkBust()) {
-                gameMsg.bust(player.getName());
-                break;
-            }
-            gameMsg.lineFeed();
-        }
-        gameMsg.lineFeed();
-    }
-
-    private void makeDealerAct() {
-        //ディーラーがカードを引く（手札を17以上にするまでカードを引く）
-        while(true){
-            // 手札を17以上にするまでカードを引く
-            if (dealer.getHand().getScore() >= 17) {
-                break;
-            }
-            dealer.draw(cardStuck);
-            // バースト判定
-            if (dealer.getHand().checkBust()) {
-                break;
+    private int inputBetPoint(int min, int max) {
+        while (true) {
+            Scanner in = new Scanner(System.in);
+            if (in.hasNextInt()) {
+                int betPoint = in.nextInt();
+                if (1 <= betPoint && betPoint <= max) {
+                    return betPoint;
+                } else {
+                    System.out.println("入力値が不正です。再入力してください。");
+                }
+            } else {
+                System.out.println("入力値が不正です。再入力してください。");
             }
         }
-        gameMsg.dealerAction();
-        gameMsg.lineFeed();
     }
 
-    private void showResult(int betPoint) {
-        //勝敗を表示する
-        //結果のポイント
-        gameMsg.result();
-        gameMsg.showHand(player);
-        gameMsg.showHand(dealer);
-        int result = judge.handJudge(player.getHand(), dealer.getHand());
-        if (result == 0) {
-            player.setPoint(player.getPoint() - betPoint);
-            gameMsg.looseHand(betPoint);
-        } else if (result == 1) {
+    private void updatePoint(int betPoint, Result miniGameResult) {
+        if (miniGameResult.getGameResult() == 0) {
+            point -= betPoint;
+        } else if (miniGameResult.getGameResult() == 1) {
             gameMsg.tieHand();
-        } else if (result == 2) {
-            double earnedPoint = betPoint * player.getHand().getRate();
-            gameMsg.winHand(earnedPoint);
-            player.setPoint(player.getPoint() + earnedPoint);
+        } else if (miniGameResult.getGameResult() == 2) {
+            point += betPoint * miniGameResult.getRate();
         }
-
-        gameMsg.lineFeed();
     }
 
     private boolean checkWhetherFinished() {
-        // 最終結果
-
-        // finalJudgeResultの値は、次のように定まる
-        // プレイヤーの負け：0
-        // ゲームが続く（勝敗未決）：1
-        // プレイヤーの勝ち：2
-        int finalJudgeResult = judge.finalJudge(player.getPoint());
-
         // ゲームが終了する場合の処理
-        if(finalJudgeResult == 0) {
+        if(point < 1) {// 負け
             gameMsg.finalResult();
-            gameMsg.loose(player.getPoint());
+            gameMsg.loose(point);
             return true;
         }
-        if(finalJudgeResult == 2) {
+        if(point >= 2000) {// 勝ち
             gameMsg.finalResult();
-            gameMsg.win(player.getPoint());
+            gameMsg.win(point);
             return true;
         }
 
-        // ゲームが続く場合の処理（山札と手札の更新）
-        cardStuck.reset();
-        player.getHand().discardAllCards();
-        dealer.getHand().discardAllCards();
+        //勝負継続
         return false;
     }
 

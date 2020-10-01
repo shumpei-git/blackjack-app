@@ -1,4 +1,4 @@
-package shumpei.cardgame.blackjack;
+package shumpei.cardgame.playingcard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +31,4 @@ public class CardStuck {
         Collections.shuffle(this.cardList);
     }
 
-    public void reset() {
-        this.cardList = null;
-        this.cardList = new ArrayList<Card>();
-        createCardStuck();
-        shuffle();
-    }
 }
